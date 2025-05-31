@@ -1,0 +1,112 @@
+<div class="container my-5">
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center align-items-center">
+      <li class="page-item d-flex align-items-center gap-2">
+        <label class="mb-0 fw-semibold">Página</label>
+        <input
+          type="number"
+          class="form-control"
+          style="width: 100px"
+          [value]="page"
+          (input)="onPageInput($event)"
+          min="1"
+          [max]="totalPages"
+        />
+        <span class="fw-semibold">de {{ totalPages }}</span>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="cargarinformacion(page - 1)"
+          [disabled]="page <= 1"
+        >
+          &laquo;
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="cargarinformacion(page + 1)"
+          [disabled]="page >= totalPages"
+        >
+          &raquo;
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  @if (mensajeerrorcreafavorito) {
+  <div
+    class="alert alert-warning alert-dismissible fade show text-center mt-3"
+    role="alert"
+  >
+    <strong>{{ mensajeerrorcreafavorito }}</strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  }
+
+  <div class="col-md-10 mx-auto mt-4">
+    <div class="card shadow">
+      <ul class="list-group list-group-flush">
+        @for (item of cargardatos.results; track item.id) {
+        <li class="list-group-item">
+          <div class="row text-center text-md-start align-items-center">
+            <div class="col-md-4 d-flex align-items-center gap-3 mb-2 mb-md-0">
+              <button class="btn btn-success" (click)="crearfavorito(item)">
+                +
+              </button>
+              <img [src]="item.image" width="50" class="rounded" alt="image" />
+              <h5 class="mb-0">{{ item.name }}</h5>
+            </div>
+            <div class="col-md-4">
+              <h6 class="mb-1">Status: {{ item.status }}</h6>
+              <p class="mb-0">Location: {{ item.location.name }}</p>
+            </div>
+            <div class="col-md-4">
+              <h6 class="mb-1">Species: {{ item.species }}</h6>
+              <p class="mb-0">ID: {{ item.id }}</p>
+            </div>
+          </div>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation" class="mt-5">
+    <ul class="pagination justify-content-center align-items-center">
+      <li class="page-item d-flex align-items-center gap-2">
+        <label class="mb-0 fw-semibold">Página</label>
+        <input
+          type="number"
+          class="form-control"
+          style="width: 100px"
+          [value]="page"
+          (input)="onPageInput($event)"
+          min="1"
+          [max]="totalPages"
+        />
+        <span class="fw-semibold">de {{ totalPages }}</span>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="cargarinformacion(page - 1)"
+          [disabled]="page <= 1"
+        >
+          &laquo;
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="cargarinformacion(page + 1)"
+          [disabled]="page >= totalPages"
+        >
+          &raquo;
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
